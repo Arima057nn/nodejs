@@ -1,0 +1,6 @@
+nodemon.json : config đuôi file thay đổi
+package.json :khai báo script, cài đặt sự phụ thuộc
+package-lock : quản lí sự phục thuộc chi tiết hơn
+
+public: quản lí file tĩnh css js img
+resource: 
