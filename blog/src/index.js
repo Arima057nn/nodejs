@@ -1,12 +1,32 @@
 const express = require("express");
 const path = require("path");
-const handlebars = require("express-handlebars");
 const morgan = require("morgan");
+const methodOverride = require("method-override");
+const handlebars = require("express-handlebars");
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 const port = 3000;
+
+const route = require("./routes");
+const db = require("./config/db");
+// Connect to DB
+db.connect();
+
 // Xử lí static file
 app.use(express.static(path.join(__dirname, "public")));
+
+// app.use(
+//   express
+//     .urlencoded
+//     extended: true
+//     ()
+// );
+
+app.use(express.json());
+app.use(methodOverride("_method"));
 // HTTP logger
 app.use(morgan("combined"));
 
@@ -14,17 +34,11 @@ app.use(morgan("combined"));
 app.engine("handlebars", handlebars.engine());
 
 app.set("view engine", "handlebars");
-app.set("views", path.join(__dirname, "./resources/views"));
+app.set("views", path.join(__dirname, "resources", "views"));
 
-app.get("/", function (req, res) {
-  res.render("home");
-  // res.render("main");
-});
+// Routes init
+route(app);
 
-app.get("/news", function (req, res) {
-  res.render("news");
-  // res.render("main");
-});
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`App listening on port ${port}`);
 });

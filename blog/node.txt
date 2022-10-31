@@ -4,3 +4,18 @@ package-lock : quản lí sự phục thuộc chi tiết hơn
 
 public: quản lí file tĩnh css js img
 resource: 
+
+app.METHOD(PATH, HANDLER) trong đó HANDLER: gọi đến 1 hàm callback
+
+app.get("/news", function (req, res) {
+  res.render("news");
+  // res.render("main");
+});
+
+\\\\\ requeset và response
+
+npm mongoose-slug-generator
+
+npm install method-override
+
+mongoosejs.com/docs/models.html
